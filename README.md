@@ -31,13 +31,13 @@ To run the analysis, the dataset by [Papasavva et al. (2020)](https://arxiv.org/
 
 The code for evaluating the classisiers used can be found in the file ```prompting.py```. The code can be run as it is and be adjusted by uncommenting the functions and the various approaches e.g., different hypotheses. To run the code, you can use the bash-command ```$ python3 prompting.py```. Each evaluating function will additionally print the accuracy and macro F1-score.
 
-* ```predict_hatespeech()``` labels a post as hate speech or non-hate
-* ```hatespeech_type_classification()``` predicts if the post contains hate speech against religion using an NLI-approach
-* ```count_targets()``` predicts if the post contains hate speech against religion using a zero-shot-approach
-* ```count_religion()``` predicts the religion against which a hate speech post is directed using a zero-shot-approach
-* ```count_religion_hypothesis()``` predicts the religion against which a hate speech post is directed using an NLI-approach
-* ```random_baseline()``` returns the values of the random baseline for the target religion prediction
-* ```majority_baseline()```returns accuracy and macro-F1 of the majority baseline (i.e., Judaism) for the target religion prediction
+* ```predict_hatespeech()``` Evaluate the model used for predicting hate speech
+* ```hatespeech_type_classification()``` Evaluate the model used for predicting the type of hate speech using an NLI-approach
+* ```count_targets()``` Evaluate the model used for predicting the type of hate speech using a zero-shot-classification-approach
+* ```count_religion()``` Evaluate the model used for predicting the target religion using a zero-shot-classification-approach
+* ```count_religion_hypothesis()``` Evaluate the model used for predicting the target religion using an NLI-approach
+* ```random_baseline()``` Return the values of the random baseline for the target religion prediction
+* ```majority_baseline()``` Return accuracy and macro-F1 of the majority baseline (i.e., Judaism) for the target religion prediction
 
 
 
