@@ -36,7 +36,7 @@ desired_columns = ['comment_id', 'text', 'hatespeech', 'target_religion', 'targe
 
 
 def extract_subset_hatespeech():
-	""" Creating three subsets the bs used fo the evaluation. """
+	""" Creating three subsets used for the evaluation. """
 
 	sub = hatespeech_ds['train'][:]
 
@@ -93,6 +93,8 @@ def extract_subset_hatespeech():
 
 
 def predict_hatespeech(data:dict):
+	"""Evaluate the model used for predicting hate speech"""
+
 	true = list()
 	pred = list()
 
@@ -115,6 +117,7 @@ def predict_hatespeech(data:dict):
 
 
 def hatespeech_type_classification(data: dict):
+	"""Evaluate the model used for predicting the type of hate speech using an NLI-approach"""
 
 	data = data.apply(lambda x: x.sample(frac=1).values)
 	data = data.reset_index()  # make sure indexes pair with number of rows
@@ -153,6 +156,7 @@ def hatespeech_type_classification(data: dict):
 
 
 def count_targets(data:dict):
+	"""Evaluate the model used for predicting the type of hate speech using a zero-shot-classification-approach"""
 
 	true = list()
 	pred = list()
@@ -182,6 +186,8 @@ def count_targets(data:dict):
 
 
 def count_religion(data:dict):
+	"""Evaluate the model used for predicting the target religion using a zero-shot-classification-approach"""
+
 	true = list()
 	pred = list()
 
@@ -201,6 +207,8 @@ def count_religion(data:dict):
 
 
 def count_religion_hypothesis(data:dict):
+	"""Evaluate the model used for predicting the target religion using an NLI-approach"""
+
 	true = list()
 	pred = list()
 
@@ -224,6 +232,8 @@ def count_religion_hypothesis(data:dict):
 
 
 def random_baseline(data:dict):
+	"""Return the values of the random baseline for the target religion prediction"""
+
 	total = Counter(sub_religious_large['target_religion'])[True]
 	counted = Counter(sub_religious_large['targeted_group']).most_common(7)
 	
@@ -233,6 +243,8 @@ def random_baseline(data:dict):
 
 
 def majority_baseline(data:dict):
+	"""Return accuracy and macro-F1 of the majority baseline (i.e., Judaism) for the target religion prediction"""
+	
 	total = Counter(sub_religious_large['target_religion'])[True]
 	counted = Counter(sub_religious_large['targeted_group'])
 	most_common = counted.most_common(1)[0][0]
