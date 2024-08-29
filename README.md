@@ -1,4 +1,5 @@
 
+
 # Categorizing Religious Online Hate Speech
 
 Programming project by Sofia Carpentieri\
@@ -9,7 +10,7 @@ University of Zurich
 
 ## Overview
 
-This project contains a pipeline to analyse the dataset collected by [Papasavva et al. (2020)](https://arxiv.org/pdf/2001.07487.pdf) and code for the evaluation of the pre-trained models used in the analysis. 
+This project contains a pipeline to analyse the dataset collected by [Papasavva et al. (2020)](https://arxiv.org/pdf/2001.07487.pdf) (```analysis.py```), the code for the evaluation of the pre-trained models used in the analysis (```prompting.py```) and a Jupyter-notebook to visualize the data (```plotting.ipynb```). 
 
 
 ## Set-up
@@ -42,7 +43,27 @@ The code for evaluating the classisiers used can be found in the file ```prompti
 
 ## Dataset Analysis
 
-To run the analysis, use the bash-command ```$ python3 analysis.py``` and input the path to the directory containing all chunked files as created in the set-up. The analysis will run by its own and does not require further input. The pipeline runs over every ```json```-file in the directory, annotates the data and metadata and stores everything in separate files. The next section explains the final directory structure.
+To run the analysis, use the bash-command ```$ python3 analysis.py``` and input the path to the directory containing all chunked files as created in the set-up. The analysis will run by its own and does not require further input. The pipeline runs over every ```json```-file in the directory, annotates the data and metadata and stores everything in separate files. The pipeline, i.e. the code in the ```main()``` function, uses three classes: 
+
+* ```Preprocessor``` 
+    * ```manual_replacement()``` Escape HTML-elements and handle board mentions
+    * ```pos_tag()``` Annotate part-of-speech tags, dependencies and linguistic information using spaCy
+    * ```preprocess_post()``` Combine the functions mentioned above
+* ```DataAnnotator```
+    * ```extract_all()``` Extract linguistic information using the ```Preprocessor```
+    * ```predict_hatespeech()``` Predict whether a post is hate speech or not
+    * ```count_targets()``` Predict wether a post is hate speech against a religion
+    * ```count_religion()``` Predict the target religion of a hate speech post
+    * ```annotate_data()``` Combine all functions mentioned above and writing the output into separate files
+* ```MetaAnalyser```
+    * ```get_statistics()``` Get the statistics of the metadata-file
+    * ```print_statistics()``` Print statistics of the metadata-file in a readable format
+
+
+
+## Visualization of (Meta) Data
+
+The Jupyter-notebook, ```plotting.ipynb```, contains the code to visualize the meta data and data. It prints raw numbers, percentages and creates plots for statistics on countries of origin of the posts, hate speech, religious hate speech and the specific religions targeted. The user only needs to input two filepaths; the path to the file ```meta_overall.tsv``` and to the directory ```extracted```.
 
 ## Final directory structure
 
